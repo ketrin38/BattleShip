@@ -1,6 +1,6 @@
 package hraci;
 
-import grafika.HraciaPlocha;
+import lodicky.More;
 
 /**
  * Počítačová úroveň číslo 1. 
@@ -14,7 +14,7 @@ public class Inteligencia1 extends Inteligencia {
      * Vytvorí počítačovú úroveň číslo 1.
      * @param plocha plocha, kde sa nachádza
      */
-    public Inteligencia1(HraciaPlocha plocha) {
+    public Inteligencia1(More plocha) {
         super("PočítačÚroveň1", plocha);
     }
    

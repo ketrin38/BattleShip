@@ -1,11 +1,15 @@
 package hraci;
 
-import grafika.HraciaPlocha;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lode.Orientacia;
 import lodicky.Parser;
 import lode.Lod;
 import lode.NemozneUlozenieLodeException;
 import lode.TypLode;
+import lodicky.More;
 
 /**
  * Riadi správanie sa užívatela, pri nastavovaní hry,lodičiek
@@ -21,8 +25,9 @@ public class Uzivatel extends Hrac {
      * Konštruktor užívateľa. Tu priradíme hraciu plochu užívateľovi.
      * @param plocha hracia plocha užívateľa
      */
-    public Uzivatel(HraciaPlocha plocha) {
-        super("Užívateľ", plocha);  
+    public Uzivatel(More plocha) {
+        super("Užívateľ", plocha);
+        
         this.parser = Parser.dajInstanciu();
     }
     
@@ -32,20 +37,52 @@ public class Uzivatel extends Hrac {
      */
     @Override
     public void vystrel(Hrac cielovy) {
-        if (this.parser == null) { 
-            this.parser = Parser.dajInstanciu();
+        int pocitadlo = 0;
+        Suradnice pom = null;
+        Suradnice suradnice = cielovy.dajHraciaPlocha().vystrelNaSupera();
+        if (pocitadlo == 0){
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Uzivatel.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+            
+        } else {
+            
+            while(true) {
+                if(!pom.equals(suradnice)) 
+                {
+                    break; 
+                }
+            }
+            this.vystrelNaPoziciu(cielovy, suradnice);
+        
         }
-        
-        System.out.println("Zadajte súradnice výstrelu:");
-        System.out.println("Riadok:");
-        int riadok = this.parser.nacitajSuradnice();
-        System.out.println("Stĺpec:");
-        int stlpec = this.parser.nacitajSuradnice();
-        
-        Suradnice suradnice = new Suradnice(riadok - 1, stlpec - 1);
-        System.out.print("Zadali ste súradnice: " + suradnice);
-        
+        pom = suradnice;      
         this.vystrelNaPoziciu(cielovy, suradnice);
+    }
+    
+    /**
+     * Užívateľ zadá počty lodí pre jednotlivé typy lodí.
+     */
+    @Override
+    public void initPoctyLodi() {
+        Random rand = new Random();
+        for (TypLode typLode : TypLode.values()) {
+             this.nastavPoctyLodi(typLode, rand.nextInt(3)); 
+         }
+    }
+   
+    /**
+     * Naplí hracie pole užívateľa lodičkami.
+     * @throws lode.NemozneUlozenieLodeException
+     */
+    @Override
+    public void naplnHraciePole() throws NemozneUlozenieLodeException {
+        this.nastavLode(TypLode.LIETADLOVA_LOD);
+        this.nastavLode(TypLode.BOJOVA_LOD);
+        this.nastavLode(TypLode.PONORKA);
+        this.nastavLode(TypLode.CLN);
     }
     
     /**
@@ -54,19 +91,19 @@ public class Uzivatel extends Hrac {
      */
     @Override
     public void naplnPole() throws NemozneUlozenieLodeException {
-        this.nastavLodeNaModro(TypLode.CLN);
-        this.nastavLodeNaModro(TypLode.PONORKA);
-        this.nastavLodeNaModro(TypLode.BOJOVA_LOD);
         this.nastavLodeNaModro(TypLode.LIETADLOVA_LOD);
+        this.nastavLodeNaModro(TypLode.BOJOVA_LOD);
+        this.nastavLodeNaModro(TypLode.PONORKA);
+        this.nastavLodeNaModro(TypLode.CLN);
     }
     
     
     /**
-     * Nastavenie orientácie lodí užívateľom.
-     * @param typ typ lode
+     * Nastavenie orientácie lodí užíveteľom.
+     * @param typLode typ lode
      */
     private void nastavLode(TypLode typLode) throws NemozneUlozenieLodeException {
-    for (int i = 0; i < this.dajPocetLodi(typLode); i++) {
+         for (int i = 0; i < this.dajPocetLodi(typLode); i++) {
             Orientacia orientacia = Orientacia.dajNahodnuOrientaciuLode();
             Lod lod = TypLode.vytvorNovuInstanciu(typLode);
             lod.ulozLod(orientacia, this.dajHraciaPlocha());
@@ -75,40 +112,15 @@ public class Uzivatel extends Hrac {
     
     /**
      * Nastavenie orientácie lodí užíveteľom.
-     * @param typ typ lode
+     * @param typLode typ lode
      */
-    private void nastavLodeNaModro(TypLode typ)
+    private void nastavLodeNaModro(TypLode typLode)
         throws NemozneUlozenieLodeException {
-        int pocet = this.dajPocetLodi(typ);
-        
-        System.out.println("Pocet lodi typu " + typ + " je " + pocet);
-        
-        if (pocet > 0) {
-            System.out.println("Postupne zadajte ich orientáciu:");
-            
-            for (int i = 0; i < pocet; i++) {
-                String text = this.parser.nacitajOrientaciu();
-                
-                Orientacia orientacia = Orientacia.prelozOrientaciuLode(text);
-                Lod lod = TypLode.vytvorNovuInstanciu(typ);
-                lod.ulozLodPc(orientacia, this.dajHraciaPlocha());
-            }
-        }
-    }  
-
-    @Override
-    public void naplnHraciePole() throws NemozneUlozenieLodeException {
-        this.nastavLodeNaModro(TypLode.CLN);
-        this.nastavLodeNaModro(TypLode.PONORKA);
-        this.nastavLodeNaModro(TypLode.BOJOVA_LOD);
-        this.nastavLodeNaModro(TypLode.LIETADLOVA_LOD);
+        for (int i = 0; i < this.dajPocetLodi(typLode); i++) {
+            Orientacia orientacia = Orientacia.dajNahodnuOrientaciuLode();
+            Lod lod = TypLode.vytvorNovuInstanciu(typLode);
+            lod.ulozLodPc(orientacia, this.dajHraciaPlocha());
+        }   
+    }
     
-    }
-
-    @Override
-    public void initPoctyLodi() {
-          for (TypLode typLode : TypLode.values()) {
-            this.nastavPoctyLodi(typLode, 2); 
-        }
-    }
 }

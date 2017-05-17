@@ -1,7 +1,7 @@
 package hraci;
 
-import grafika.HraciaPlocha;
 import java.util.ArrayList;
+import lodicky.More;
 
 /**
  * Počítačová úroveň číslo 2. 
@@ -16,7 +16,7 @@ public class Inteligencia2 extends Inteligencia {
      * Konštruktor.
      * @param plocha inteligencie2
      */
-    public Inteligencia2(HraciaPlocha plocha) {
+    public Inteligencia2(More plocha) {
         super("PočítačÚroveň2", plocha);
 
         this.netrafenePolicka = new ArrayList<>();

@@ -5,11 +5,11 @@
  */
 package lodicky;
 
-import grafika.HraciaPlocha;
 import hraci.Inteligencia1;
 import hraci.Inteligencia2;
 import hraci.Inteligencia3;
 import hraci.Uzivatel;
+
 
 /**
  * Enum typov novej hry.
@@ -29,8 +29,8 @@ public enum TypNovejHry {
      * @return hra daneho typu
      */
     public static LogikaHry vybratieTypu(int cislo) {
-        HraciaPlocha poleUzivatel = new HraciaPlocha(50 , 50);   // uzivatel
-        HraciaPlocha pole2 = new HraciaPlocha(450 , 50);
+        More poleUzivatel = new More("More používateľa");  // uzivatel
+        More pole2 = new More("More protihráč");
         Uzivatel uzivatel = new Uzivatel(poleUzivatel);
         LogikaHry hra = null;
         switch( cislo ) {

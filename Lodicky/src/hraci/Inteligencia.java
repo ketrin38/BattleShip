@@ -5,12 +5,12 @@
  */
 package hraci;
 
-import grafika.HraciaPlocha;
 import java.util.Random;
 import lode.Lod;
 import lode.NemozneUlozenieLodeException;
 import lode.Orientacia;
 import lode.TypLode;
+import lodicky.More;
 
 
 
@@ -21,17 +21,18 @@ import lode.TypLode;
  * @author Katarína Pilarčíková
  */
 public abstract class Inteligencia extends Hrac {
-   private Random rand;
+    private final Random rand;
+    
     /**
      * Konštruktor. 
      * @param meno názov inteligencie
      * @param hraciaPlocha hracia plocha na ktorej sa nachádza
      */
-    public Inteligencia(String meno, HraciaPlocha hraciaPlocha) {
+    public Inteligencia(String meno, More hraciaPlocha) {
         super(meno, hraciaPlocha);
         this.rand = new Random();
-    }   
-   
+    }
+  
     /**
      * Inicializuje malé počty lodí.
      */
@@ -40,6 +41,24 @@ public abstract class Inteligencia extends Hrac {
         for (TypLode typLode : TypLode.values()) {
             this.nastavPoctyLodi(typLode, this.rand.nextInt(3)); 
         }
+    }
+    
+    /**
+     * Naplnenie hracieho poľa počítača lodičkami.
+     */
+    @Override
+    public void naplnHraciePole() throws NemozneUlozenieLodeException {
+        this.nastavLode(TypLode.LIETADLOVA_LOD);
+        this.nastavLode(TypLode.BOJOVA_LOD);
+        this.nastavLode(TypLode.PONORKA);
+        this.nastavLode(TypLode.CLN);
+    }
+    
+    /**
+     * Naplní more loďami.
+     */
+    @Override
+    public void naplnPole() {
     }
     
     /**
@@ -59,27 +78,6 @@ public abstract class Inteligencia extends Hrac {
         return this.rand.nextInt(max);
     } 
     
-
-    /**
-     * Naplnenie hracieho poľa počítača lodičkami.
-     */
-    @Override
-    public void naplnHraciePole() throws NemozneUlozenieLodeException {
-        this.nastavLode(TypLode.CLN);
-        this.nastavLode(TypLode.PONORKA);
-        this.nastavLode(TypLode.BOJOVA_LOD);
-        this.nastavLode(TypLode.LIETADLOVA_LOD);
-    }
-    
-    /**
-     * Naplní more loďami.
-     */
-    @Override
-    public void naplnPole() {
-    }
-    
-    
-    
     /**
      * Nastavenie lodí a ich orientácie. 
      * @param typLode typ lodí, ktoré nastavujeme
@@ -91,5 +89,5 @@ public abstract class Inteligencia extends Hrac {
             lod.ulozLodPc(orientacia, this.dajHraciaPlocha());
         }
     }
-
+    
 }

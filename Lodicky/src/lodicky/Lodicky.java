@@ -25,6 +25,7 @@ public class Lodicky {
     public static void main(String[] args) {
         Lodicky lodicky = Lodicky.dajInstanciu();
         lodicky.spusti();
+ 
     }
     
     /**
@@ -34,8 +35,7 @@ public class Lodicky {
     public static Lodicky dajInstanciu() {
         if (instancia == null) {
             instancia = new Lodicky();
-        }
-        
+        }  
         return instancia;
     }
     
@@ -96,7 +96,7 @@ public class Lodicky {
             JFrame frame = new JFrame("Hra lodicky");
         String zvolenaHra = (String) JOptionPane.showInputDialog(frame, 
         "Zvolte si typ hry",
-        "Typ hry ",
+        "Hra lodičky",
         JOptionPane.QUESTION_MESSAGE, null, typy, typy[0]);
         
         if (zvolenaHra.equals("Posledná hra")) {

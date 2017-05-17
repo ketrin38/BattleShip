@@ -1,10 +1,10 @@
 package hraci;
 
-import grafika.HraciaPlocha;
 import java.io.Serializable;
 import java.util.HashMap;
 import lode.NemozneUlozenieLodeException;
 import lode.TypLode;
+import lodicky.More;
 
 /**
  * Trieda pre hráčov uchováva informácie o jeho mene, o počte jeho lodí i
@@ -14,7 +14,7 @@ import lode.TypLode;
  * @author Katarína Pilarčíková
  */
 public abstract class Hrac implements Serializable {
-    private final HraciaPlocha hraciaPlocha;
+    private final More hraciaPlocha;
     private final HashMap<TypLode, Integer> poctyLodi;
     
     private String meno;
@@ -26,7 +26,7 @@ public abstract class Hrac implements Serializable {
      * @param meno meno hráča
      * @param hraciaPlocha hracia plocha, kde hrá hrč
      * */
-    public Hrac(String meno, HraciaPlocha hraciaPlocha) {
+    public Hrac(String meno, More hraciaPlocha) {
         this.meno = meno;
         this.nepotopene = 0;
         this.hraciaPlocha = hraciaPlocha;
@@ -128,7 +128,7 @@ public abstract class Hrac implements Serializable {
      * Vráti hraciu plochuhráča.
      * @return hraciu plochu hráča
      */
-    public HraciaPlocha dajHraciaPlocha() {
+    public More dajHraciaPlocha() {
         return this.hraciaPlocha;
     }
     
@@ -148,13 +148,21 @@ public abstract class Hrac implements Serializable {
         this.meno = noveMeno;
     }
     
+     /**
+     * Vreti meno hráča. 
+     * @return meno hráča
+     */
+    public String dajMeno() {
+        return this.meno;
+    }
+    
     /**
      * Strieľanie na protihráčovu plochu a oznámenie hráčovi, či trafil.
      * @param cielovy hráč, na ktorého plochu sa strieľa
      * @param suradnice súradnice kam stieľa
      */
     protected void vystrelNaPoziciu(Hrac cielovy, Suradnice suradnice) {
-        HraciaPlocha cielovaHraciaPlocha = cielovy.dajHraciaPlocha();
+        More cielovaHraciaPlocha = cielovy.dajHraciaPlocha();
         
         String sprava;
         if (cielovaHraciaPlocha.jeLodickaNa(suradnice)) {
@@ -175,4 +183,3 @@ public abstract class Hrac implements Serializable {
     
 
 }
-

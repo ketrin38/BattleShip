@@ -1,8 +1,8 @@
 package lode;
 
 import java.util.Random;
-import grafika.HraciaPlocha;
 import hraci.Suradnice;
+import lodicky.More;
 
 /**
  * Trieda lode
@@ -34,7 +34,7 @@ public class Lod {
     * @param hraciaPlocha hracia polcha, kde sa loď uloží
     * @throws lode.NemozneUlozenieLodeException
     */
-    public void ulozLod(Orientacia orientacia, HraciaPlocha hraciaPlocha)
+    public void ulozLod(Orientacia orientacia, More hraciaPlocha)
         throws NemozneUlozenieLodeException {
         this.pokusUlozenieLode(orientacia, hraciaPlocha, this.farbaLode);
     }
@@ -45,7 +45,7 @@ public class Lod {
     * @param hraciaPlocha hracia polcha, kde sa loď uloží
     * @throws lode.NemozneUlozenieLodeException
     */
-    public void ulozLodPc(Orientacia orientacia, HraciaPlocha hraciaPlocha)
+    public void ulozLodPc(Orientacia orientacia, More hraciaPlocha)
         throws NemozneUlozenieLodeException {
         this.pokusUlozenieLode(orientacia, hraciaPlocha, "blue");
     }
@@ -85,7 +85,7 @@ public class Lod {
      * @throws NemozneUlozenieLodeException 
      */
     private void pokusUlozenieLode(Orientacia orientacia,
-            HraciaPlocha hraciaPlocha, String farba)
+            More hraciaPlocha, String farba)
         throws NemozneUlozenieLodeException {
         Suradnice suradnice = null;
         

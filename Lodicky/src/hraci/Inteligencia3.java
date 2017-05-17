@@ -1,9 +1,8 @@
 package hraci;
 
 
-import grafika.HraciaPlocha;
 import java.util.ArrayList;
-import lode.NemozneUlozenieLodeException;
+import lodicky.More;
 
 /**
  * Počítačová úroveň číslo 3. 
@@ -19,7 +18,7 @@ public class Inteligencia3 extends Inteligencia {
      * Vytvorí počítačovú úroveň číslo 3.
      * @param plocha plocha, kde sa nachádza
      */
-    public Inteligencia3(HraciaPlocha plocha) {
+    public Inteligencia3(More plocha) {
         super("PočítačÚroveň3", plocha);
         
         this.netrafenePolicka = new ArrayList<>();
@@ -105,6 +104,5 @@ public class Inteligencia3 extends Inteligencia {
         
         return null;
     }      
-
 }
 

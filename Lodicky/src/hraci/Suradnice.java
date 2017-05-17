@@ -1,6 +1,5 @@
 package hraci;
 
-import grafika.HraciaPlocha;
 import java.io.Serializable;
 
 /**
@@ -89,7 +88,7 @@ public class Suradnice implements Serializable {
      * @return true ak existuje v poli 
      */
     public boolean existujeTaka() {
-        return ((this.riadok < HraciaPlocha.ROZMER ) && (this.riadok >= 0)) &&
-                ((this.stlpec < HraciaPlocha.ROZMER ) && (this.stlpec >= 0)); 
+        return ((this.riadok < 10 ) && (this.riadok >= 0)) &&
+                ((this.stlpec < 10 ) && (this.stlpec >= 0)); 
     } 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import hraci.Hrac;
 import hraci.Uzivatel;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import lode.NemozneUlozenieLodeException;
 
 /**
@@ -16,7 +17,8 @@ public class LogikaHry implements Serializable {
     private Hrac prvyHrac;
     private Hrac druhyHrac;
     private transient Parser parser;
-    
+    private Gui hraOkno;
+
     /**
      * Konštruktor logiky hry.
      * @param prvyHrac prvý hráč v hre 
@@ -26,6 +28,8 @@ public class LogikaHry implements Serializable {
         this.prvyHrac = prvyHrac;
         this.druhyHrac = druhyHrac;
         this.parser = Parser.dajInstanciu();
+        this.hraOkno = null;
+        
     }
     
     /**
@@ -33,19 +37,24 @@ public class LogikaHry implements Serializable {
      * @param novaHra indikuje ci je dana hra nova alebo nacitana zo suboru
      */
     public void hra(boolean novaHra) {
-        if (novaHra) {
+        this.hraOkno = new Gui(this.prvyHrac.dajHraciaPlocha(),this.druhyHrac.dajHraciaPlocha());    
+        if (novaHra) {         
+            this.hraOkno.vykresli();
             this.inicializujPoradieHracov();
             this.inicializujHru();
+            this.hraOkno.nastavPocty(this.prvyHrac.dajNepotopene(), this.druhyHrac.dajNepotopene());
         } else {
             this.prvyHrac.dajHraciaPlocha().prekresli();
             this.druhyHrac.dajHraciaPlocha().prekresli();
+            this.hraOkno.nastavPocty(this.prvyHrac.dajNepotopene(), this.druhyHrac.dajNepotopene());
+            this.hraOkno.vykresli(); 
         }
-        
+              
         Hrac vitaz = null;
         
         while (true) {                 
             this.vypisOramovanie();
-            
+           
             this.prvyHrac.vystrel(this.druhyHrac);
             if (this.jeKoniecHry()) {
                 vitaz = this.prvyHrac;
@@ -58,19 +67,18 @@ public class LogikaHry implements Serializable {
             }
             
             this.vypisInfoOPolickach(this.prvyHrac, this.druhyHrac);
-            this.vypisInfoOPolickach(this.druhyHrac, this.prvyHrac);
-            
             this.vypisOramovanie();
-            
             // Automaticke ukladanie po kazdrom kroku
             Lodicky.dajInstanciu().ulozHru();
         }
         
-        System.out.println("Hra bola úspešne ukončená.");
-        System.out.println("Víťazom sa stal hráč " + vitaz + "!!!");
-        
-        this.kontrolaDostupnostiParseru();
-        this.parser.nacitajVolbuKoniecApp();
+        if ((JOptionPane.showConfirmDialog(null, "Hra bola úspešne ukončená." +
+                "Víťazom sa stal hráč " + vitaz + "!!!"
+                + "\nPáčila sa vám hra ?", "", JOptionPane.YES_NO_OPTION)) == JOptionPane.YES_OPTION)
+            
+	    System.exit(0);
+	else
+	    System.exit(0);
     }
     
     /**
@@ -110,9 +118,8 @@ public class LogikaHry implements Serializable {
         if (hodnota) { // false - ponechame povodne, true - vymena poradia
             this.vymenPoradieHracov();
         }
-        
-        System.out.println("Hru začína hráč '" + this.prvyHrac + "'! "
-                + "Tento hráč určuje aj počty lodí.");
+        this.hraOkno.nastavPrveho(this.prvyHrac.dajMeno());
+        System.out.println("Hru začína hráč '" + this.prvyHrac );
     }
     
     /**
@@ -194,11 +201,8 @@ public class LogikaHry implements Serializable {
      * @param cielovy 
      */
     private void vypisInfoOPolickach(Hrac utociaci, Hrac cielovy) {
-        int pocet = cielovy.dajNepotopene();
-        
-        System.out.println("Hráč " + utociaci + " musí ešte trafiť: " + pocet);
+        this.hraOkno.nastavPocty(utociaci.dajNepotopene(), cielovy.dajNepotopene());
     }
-    
     
     private void nastaveniePoctovLodi() {
         this.prvyHrac.initPoctyLodi();
