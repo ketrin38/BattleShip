@@ -29,7 +29,6 @@ public class LogikaHry implements Serializable {
         this.druhyHrac = druhyHrac;
         this.parser = Parser.dajInstanciu();
         this.hraOkno = null;
-        
     }
     
     /**
@@ -143,6 +142,10 @@ public class LogikaHry implements Serializable {
         return prvySkoncil || druhySkoncil;
     }
     
+    /**
+     * Naplní more so štandardnými farbami
+     * @return true ak bola naplnena spravne, inak false
+     */
     private boolean naplnPoliaStandardne() {
         while (true) {
             try {
@@ -162,6 +165,10 @@ public class LogikaHry implements Serializable {
         }
     }
     
+    /**
+     * Naplní more, ale označí ich na modro
+     * @return true ak bola naplnena spravne, inak false
+     */
     private boolean naplnPoliaNaModro() {
         while (true) {
             try {
@@ -181,7 +188,9 @@ public class LogikaHry implements Serializable {
         }
     }
     
-    // Nutne pri opatovnom spusteni hry zo suboru, parser je nutne vytvor znovu
+    /**
+     * Skontoluje dostupnosť parseru.
+     */
     private void kontrolaDostupnostiParseru() {
         if (this.parser == null) {
             this.parser = Parser.dajInstanciu();
@@ -204,6 +213,9 @@ public class LogikaHry implements Serializable {
         this.hraOkno.nastavPocty(utociaci.dajNepotopene(), cielovy.dajNepotopene());
     }
     
+    /**
+     * Nastaví počet pre dryhého hráča.
+     */
     private void nastaveniePoctovLodi() {
         this.prvyHrac.initPoctyLodi();
         this.druhyHrac.duplikujPoctyLodi(this.prvyHrac);
