@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  * Spúšťacia trieda hry.
- * @version 2015.06.11
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public class Lodicky {
@@ -122,9 +122,6 @@ public class Lodicky {
         }
     }
 
-    
-    
-    
     /**
      * Načíta uloženú hru.
      * @return uloženú hru

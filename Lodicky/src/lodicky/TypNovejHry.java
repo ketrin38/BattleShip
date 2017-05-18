@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lodicky;
 
 import hraci.Inteligencia1;
@@ -13,7 +8,8 @@ import hraci.Uzivatel;
 
 /**
  * Enum typov novej hry.
- * @version 2015.06.11
+ * 
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public enum TypNovejHry {
@@ -21,8 +17,6 @@ public enum TypNovejHry {
     INTELIGENCIA_2,
     INTELIGENCIA_3,
     UZIVATEL_VS_UZIVATEL;
-
-    
     /**
      * Vytvotenie typu novej hry.
      * @param cislo cislo prisluchajuce k typu hry.

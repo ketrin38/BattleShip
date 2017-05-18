@@ -7,7 +7,7 @@ import lodicky.More;
 /**
  * Trieda lode
  * 
- * @version 2015.06.22
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public class Lod {
@@ -75,7 +75,6 @@ public class Lod {
             return new Suradnice(hodnotaB, hodnotaA);
         }
     }
-    
     
     /**
      * Pokus o uloženie lode

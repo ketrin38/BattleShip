@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Súradnice v hracej ploche pouzívané pri nastavovaní a strielaní. 
  * 
- * @version 2015.06.11
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public class Suradnice implements Serializable {

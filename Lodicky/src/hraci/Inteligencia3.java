@@ -7,7 +7,7 @@ import lodicky.More;
 /**
  * Počítačová úroveň číslo 3. 
  * 
- * @version 2015.06.11
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public class Inteligencia3 extends Inteligencia {

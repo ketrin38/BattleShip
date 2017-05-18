@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lodicky;
 
-import hraci.Suradnice;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.Serializable;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 
 /**
- *
- * @author Katka
+ * Rozhranie hry lodičky.
+ * 
+ * @version 2017.05.18
+ * @author Katarína Pilarčíková
  */
 public class Gui implements Serializable {
     
@@ -30,6 +21,11 @@ public class Gui implements Serializable {
     private JLabel druhyMusiTrafit;
     private JLabel prvyHrac;
     
+    /**
+     * Konštruktor.
+     * @param prve more prvého hráča
+     * @param druhe more druhého hráča
+     */
     public Gui(More prve, More druhe) 
     {
         this.prveMore = prve;
@@ -39,6 +35,9 @@ public class Gui implements Serializable {
         this.prvyHrac = new JLabel();
     }
     
+    /**
+     * Vykreslí rozhranie. 
+     */
     public void vykresli() {
         JFrame frame = new JFrame("Hra lodičky");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,28 +54,31 @@ public class Gui implements Serializable {
         grid2.add( this.druhyMusiTrafit);
         grid2.add( new JLabel("Hru začína:"));
         this.prvyHrac.setText("-------");
-        grid2.add(this.prvyHrac);
-        
+        grid2.add(this.prvyHrac); 
         frame.getContentPane().add(grid2);
         frame.getContentPane().add(this.prveMore.vykresli());
-
         frame.getContentPane().add(this.druheMore.vykresli());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    
     }
     
-    public void nastavPocty(int prvy, int druhy) 
-    {
+    /**
+     * Nastaví počty políčok, ktoré musia hráči trafiť.
+     * @param prvy počet prvého
+     * @param druhy počet druhého
+     */
+    public void nastavPocty(int prvy, int druhy){
         this.prvyMusiTrafit.setText(Integer.toString(prvy));
         this.druhyMusiTrafit.setText(Integer.toString(druhy));
     } 
     
-    public void nastavPrveho(String meno) 
-    {
+    /**
+     * Nastaví meno hráča, ktorý je prvý na rade.
+     * @param meno meno prveho hraca
+     */
+    public void nastavPrveho(String meno){
         this.prvyHrac.setText(meno);
     } 
-    
-    
-}
+   
+ }

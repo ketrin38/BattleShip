@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lodicky;
 
 import hraci.Suradnice;
@@ -22,8 +17,10 @@ import lode.Lod;
 import lode.Orientacia;
 
 /**
- *
- * @author Katka
+ * Objekt predstavuje hraciu plochu hráča. 
+ * 
+ * @version 2017.05.18
+ * @author Katarína Pilarčíková
  */
 public class More extends JFrame implements ActionListener {
     public static final int ROZMER = 10;
@@ -33,6 +30,10 @@ public class More extends JFrame implements ActionListener {
     private String nazov;
     public Suradnice surad;
     
+    /**
+     * Konštruktor mora.
+     * @param nazov názov mora
+     */
     public More(String nazov) {
         this.surad = new Suradnice(4, 4);
         this.tlacidla = new JButton[ROZMER][ROZMER];
@@ -46,6 +47,10 @@ public class More extends JFrame implements ActionListener {
         }
     } 
     
+    /**
+     * Vykresleslí grafiku mora.
+     * @return JPanel panel mora
+     */
     public JPanel vykresli() 
     {
         JPanel grid1 = new JPanel(new GridLayout(ROZMER,ROZMER));
@@ -65,19 +70,25 @@ public class More extends JFrame implements ActionListener {
         grid1.setBorder(grid1Border); 
         return grid1;
     } 
- 
+    
+    /**
+     * Nastaví farbu tlačidlu.
+     * @param i súradnica tlačidla riadok
+     * @param j súradnica tlačidla stĺpec
+     * @return Color farba
+     */
     public Color nastavFarbu(int i, int j) {
         String farba = this.vlastnosti_cast[i][j].dajFarbu();
        switch (farba)
     	{
-    		case "blue": return Color.blue;
-    		case "red": return Color.red;
-    		case "green":  return Color.green;
-                case "yellow": return Color.yellow;
-                case "brown": return Color.BLACK;
-                case "magenta": return Color.MAGENTA;
-                case "white": return Color.WHITE;
-    		default: return Color.orange;
+            case "blue": return Color.blue;
+            case "red": return Color.red;
+            case "green":  return Color.green;
+            case "yellow": return Color.yellow;
+            case "brown": return Color.BLACK;
+            case "magenta": return Color.MAGENTA;
+            case "white": return Color.WHITE;
+            default: return Color.orange;
     	}
     }
     
@@ -224,13 +235,19 @@ public class More extends JFrame implements ActionListener {
         }
      }   
     
- /**
+    /**
      * Umiestni lodičku na hraciu plochu.
      */
     public Suradnice vystrelNaSupera() {
         return this.surad;
     }
     
+    /**
+     * Vystrelí na zadané súradnice.
+     * @param x súradnica x
+     * @param y súradnica y
+     * @return Suradnice 
+     */
     public Suradnice vystrel(int x, int y) {
         return this.surad = new Suradnice(x,y);
     }
@@ -240,23 +257,37 @@ public class More extends JFrame implements ActionListener {
        
     }
 
-       
+    /**
+     * Objekt, ktorý zabezpečuje správu udalostí na Mori.
+     * @version 2017.05.18
+     * @author Katarína Pilarčíková
+     */   
     public class ButtonMouseListener extends MouseAdapter {
         private final More more;
         private final int x;
 	private final int y;
-
+        
+        /**
+         * Konštruktor.
+         * @param more more, kde patrí tlačidlo
+         * @param x súradnica tlačidla x
+         * @param y súradnica tlačidla y
+         */
 	public ButtonMouseListener(More more, int x, int y){
 	    this.more = more;
 	    this.x = x;
 	    this.y = y;
 	}
-
+        
+        /**
+         * Sledovanie udalosti stlačenie tlačidla.
+         * Nastaví súradnicu ďalšieho výstrelu.
+         * @param e udalosť
+         */
 	public void mousePressed(MouseEvent e)
 	{
             more.tlacidla[x][y].setBackground(Color.LIGHT_GRAY);
-            more.surad = new Suradnice(x,y);
-            
+            more.surad = new Suradnice(x,y); 
 	}
          
     }

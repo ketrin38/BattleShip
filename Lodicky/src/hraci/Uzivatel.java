@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lode.Orientacia;
-import lodicky.Parser;
 import lode.Lod;
 import lode.NemozneUlozenieLodeException;
 import lode.TypLode;
@@ -15,11 +14,10 @@ import lodicky.More;
  * Riadi správanie sa užívatela, pri nastavovaní hry,lodičiek
  * aj samotnom strieľaní na protihráčovu hraciu plochu.
  * 
- * @version 2015.06.11
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public class Uzivatel extends Hrac {
-    private transient Parser parser;
     
     /**
      * Konštruktor užívateľa. Tu priradíme hraciu plochu užívateľovi.
@@ -28,7 +26,6 @@ public class Uzivatel extends Hrac {
     public Uzivatel(More plocha) {
         super("Užívateľ", plocha);
         
-        this.parser = Parser.dajInstanciu();
     }
     
     /**

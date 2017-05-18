@@ -10,16 +10,14 @@ import lodicky.More;
  * Trieda pre hráčov uchováva informácie o jeho mene, o počte jeho lodí i
  * o tom koľko políčok ešte nemá potopených.
  * 
- * @version 2015.06.22
+ * @version 2017.05.18
  * @author Katarína Pilarčíková
  */
 public abstract class Hrac implements Serializable {
     private final More hraciaPlocha;
-    private final HashMap<TypLode, Integer> poctyLodi;
-    
+    private final HashMap<TypLode, Integer> poctyLodi;  
     private String meno;
     private int nepotopene;
-    
     
     /**
      * Konštruktor hráča.
