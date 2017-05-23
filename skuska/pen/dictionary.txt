@@ -1,0 +1,14 @@
+one,jeden
+two,dva
+three,tri
+four,styri
+five,pat
+six,sest
+seven,sedem
+eight,osem
+nine,devat
+ten,desat
+eleven,jedenast
+twelve,dvanast
+thirteen,trinast
+fourteen,strnast

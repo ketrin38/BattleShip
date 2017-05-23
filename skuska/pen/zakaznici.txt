@@ -1,0 +1,16 @@
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
+Zakaznik{meno=dsad, priezvisko=dsadas, vklad=548}
+
